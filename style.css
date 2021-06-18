@@ -1,0 +1,9 @@
+select#Standards-first-medic-help {
+  visibility: hidden;
+}
+select#Standards-special-med-help {
+  visibility: hidden;
+}
+select#Standards-imidi-med-help {
+  visibility: hidden;
+}
