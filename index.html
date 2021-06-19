@@ -5,12 +5,15 @@
   <title>db health</title> 
   <link rel="stylesheet" href="style.css">
   <script src="scripts.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.4.0/dist/sql-wasm.js" integrity="sha512-8oJoeo0ykAzuJzQFJDnwz9t4Rr+1xue7LFX+kr0NJMpOHH9QJPC563If+sakheUe3QbLwTTgXIGPC6YZTwp7Iw==" crossorigin="anonymous"></script>
  </head> 
 <body>
+
 <select class="standard" name="standard" id="standard">
-    <option value="1">Стандарты первичной медико-санитарной помощи</option>
-    <option value="2" selected>Стандарты специализированной медицинской помощи</option>
-    <option value="3">Стандарты скорой медицинской помощи</option>
+    <option value="0" data-display="Выберите стандарт мед помощи">Выберите стандарт мед помощи</option>
+    <option value="1" disabled>Стандарты первичной медико-санитарной помощи</option>
+    <option value="2" >Стандарты специализированной медицинской помощи</option>
+    <option value="3" disabled>Стандарты скорой медицинской помощи</option>
 </select> 
 
 <select name="Standards-first-medic-help" id="Standards-first-medic-help">

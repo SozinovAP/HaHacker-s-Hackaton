@@ -1,6 +1,5 @@
-const selectElement = document.querySelector('.standard');
-const db = require('./public/javascripts/dataBase');
 
+const selectElement = document.querySelector('.standard');
 selectElement.addEventListener('change', (event) => {
     var e = document.getElementById('standard');
     var r = e.value;
@@ -10,6 +9,16 @@ selectElement.addEventListener('change', (event) => {
         show2();
     if (r === "3")
         show3();
+    if (r === "0")
+    {
+        let ed = document.getElementById('Standards-first-medic-help');
+        let ed1 = document.getElementById('Standards-special-med-help');
+        let ed2 = document.getElementById('Standards-imidi-med-help');
+
+        ed1.style.visibility = 'hidden';
+        ed2.style.visibility = 'hidden';
+        ed.style.visibility = 'hidden';
+    }
 });
 
 function show1()
@@ -41,11 +50,4 @@ function show3()
     ed1.style.visibility = 'hidden';
     ed2.style.visibility = 'hidden';
     ed.style.visibility = 'visible';
-}
-
-function ExampleWorkWithCallback()
-{
-    db.GetCriteria("orderClause", (/*variables*/)=>{
-        //Action
-});
 }
