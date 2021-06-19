@@ -9,6 +9,7 @@ var index1Router= require('./routes/index1');
 var index2Router = require('./routes/index2');
 
 var app = express();
+app.use(express.static(path.join(__dirname, 'public')));
 
 const hbs = require("hbs");
 app.set("view engine", "hbs");
@@ -18,7 +19,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/index1', index1Router);

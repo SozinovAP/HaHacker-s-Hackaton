@@ -8,10 +8,14 @@ router.get('/', function(req, res, next) {
    let age = 'child';
 
    db.GetStandardAndOrderClause(code, age, (mas)=>{
-      res.render('index.hbs', {title: 'Health', criteria:mas});
+      let cr = mas[0].orderClause;
+      db.GetCriteria(cr, (mas2)=>{
+         res.render('index.hbs', {title: 'Health', criteria:mas2});
+      });
    }, ()=>{
       res.send("Error");
-   });});
+   });
+});
 
 router.get("/:lnk", function (req, res, next) {
    // Get from another editText or pass from another page
@@ -19,7 +23,11 @@ router.get("/:lnk", function (req, res, next) {
    let age = 'child';
 
    db.GetStandardAndOrderClause(code, age, (mas)=>{
-      res.render('index.hbs', {title: 'Health', criteria:mas})
+      let cr = mas[0].orderClause;
+      db.GetCriteria(cr, (mas2)=>{
+         let aa = mas2[0].criteria;
+         res.render('index.hbs', {title: 'Health', criteria:mas2});
+      });
    }, ()=>{
       res.send("Error");
    });

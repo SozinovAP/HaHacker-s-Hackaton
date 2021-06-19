@@ -2,11 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Health</title>
     <link rel="stylesheet" href="../style.css">
     <script src = "/public/javascript/tools.js"></script>
     <script src = "/public/javascript/scripts.js" defer></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.4.0/dist/sql-wasm.js" integrity="sha512-8oJoeo0ykAzuJzQFJDnwz9t4Rr+1xue7LFX+kr0NJMpOHH9QJPC563If+sakheUe3QbLwTTgXIGPC6YZTwp7Iw==" crossorigin="anonymous"></script>
+    <title>Health</title>
 </head>
 <body>
 
@@ -81,8 +81,11 @@
 <form>
     <p>Критерии: </p>
     <body>
-        <iframe src='{{criteria.criteria}}'>
+    {{#each criteria}}
+        <iframe src="/source/criteria/{{this.criteria}}">
         </iframe>
+    {{/each}}
+
     </body>
 </form>
 </body>

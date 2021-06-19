@@ -56,7 +56,6 @@ function CreateDB()
 }
 
 CreateDB();
-
 function InsertOrderClause(disCode, age, orderClause, standard)
 {
     const db = new sqlite3.Database('./databaseName');
@@ -71,7 +70,7 @@ function InsertCriteria(orderClause, criteria)
 {
     const db = new sqlite3.Database('./databaseName');
     db.serialize(function() {
-        let sql = "INSERT INTO " + CRITERIA_TABLE + " (" + ORDER_CLAUSE_COLUMN + ", " + CRITERIA_COLUMN + "), " +
+        let sql = "INSERT INTO " + CRITERIA_TABLE + " (" + ORDER_CLAUSE_COLUMN + ", " + CRITERIA_COLUMN + ") " +
         "VALUES(?, ?)";
         db.run(sql, orderClause, criteria);
     });
@@ -82,7 +81,7 @@ function InsertService(code, name)
     const db = new sqlite3.Database('./databaseName');
     db.serialize(function() {
         let sql = "INSERT INTO " + SERVICES_LIST_TABLE +
-            " (" + CODE_COLUMN + ", " + NAME_COLUMN  + "), " +
+            " (" + CODE_COLUMN + ", " + NAME_COLUMN  + ") " +
             "VALUES(?, ?)";
         db.run(sql, code, name);
     });
@@ -93,7 +92,7 @@ function InsertMedication(code, name)
     const db = new sqlite3.Database('./databaseName');
     db.serialize(function() {
         let sql = "INSERT INTO " + MEDICATIONS_LIST_TABLE +
-            " (" + CODE_COLUMN + ", " + NAME_COLUMN  + "), " +
+            " (" + CODE_COLUMN + ", " + NAME_COLUMN  + ") " +
             "VALUES(?, ?)";
         db.run(sql, code, name);
     });
@@ -104,7 +103,7 @@ function InsertServiceAndMedicationList(standard, service, medications)
     const db = new sqlite3.Database('./databaseName');
     db.serialize(function() {
         let sql = "INSERT INTO " + LIST_TABLE +
-            " (" + STANDARD_COLUMN + ", " + SERVICE_COLUMN + ", " + MEDICATIONS_COLUMN + "), " +
+            " (" + STANDARD_COLUMN + ", " + SERVICE_COLUMN + ", " + MEDICATIONS_COLUMN + ") " +
             "VALUES(?, ?, ?)";
         db.run(sql, standard, service, medications);
     });
