@@ -1,4 +1,6 @@
 const selectElement = document.querySelector('.standard');
+const db = require('./public/javascripts/dataBase');
+
 selectElement.addEventListener('change', (event) => {
     var e = document.getElementById('standard');
     var r = e.value;
@@ -39,4 +41,11 @@ function show3()
     ed1.style.visibility = 'hidden';
     ed2.style.visibility = 'hidden';
     ed.style.visibility = 'visible';
+}
+
+function ExampleWorkWithCallback()
+{
+    db.GetCriteria("orderClause", (/*variables*/)=>{
+        //Action
+});
 }
