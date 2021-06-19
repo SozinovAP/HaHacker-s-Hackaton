@@ -81,8 +81,11 @@
     <p>Критерии: </p>
     <body>
     {{#each criteria}}
-        <iframe src="/source/criteria/{{this.criteria}}">
-        </iframe>
+        <embed src="/source/criteria/{{this.criteria}}">
+            <select name="Select_answer" id="Select_answer">
+                <option class="Yes">Yes</option>
+                <option class="No">No</option>
+            </select>
     {{/each}}
 
     </body>

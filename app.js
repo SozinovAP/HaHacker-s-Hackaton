@@ -4,9 +4,9 @@ var db = require('./public/javascript/dataBase');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var index1Router= require('./routes/index1');
-var index2Router = require('./routes/index2');
+var repeatRouter = require('./routes/reAppeal');
+var startRouter= require('./routes/start');
+var firstRouter = require('./routes/firstAppeal');
 
 var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
@@ -20,9 +20,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', indexRouter);
-app.use('/index1', index1Router);
-app.use('/index2', index2Router);
+app.use('/', startRouter);
+app.use('/firstAppeal', firstRouter);
+app.use('/reAppeal', repeatRouter);
 
 app.get('*', function (req, res) {
     res.send("Error!");
