@@ -51,3 +51,49 @@ function show3()
     ed2.style.visibility = 'hidden';
     ed.style.visibility = 'visible';
 }
+
+const selectElement1 = document.querySelector('.ufo');
+selectElement1.addEventListener('change', (event) => {
+    var e = document.getElementById('ufo');
+    var str = e.options[e.selectedIndex].text;
+    var a = document.createElement("p");
+    a.className = "analize";
+    a.innerHTML = "Провести лабораторные методы исследования: " + str;
+    var b = document.getElementById('lol');
+    b.append(a);
+});
+
+const selectElement2 = document.querySelector('.doctors');
+selectElement2.addEventListener('change', (event) => {
+    var e = document.getElementById('doctors');
+    var str = e.options[e.selectedIndex].text;
+    var a = document.createElement("p");
+    a.className = "napravleniya";
+    a.innerHTML = "Посетить врача-специалиста: " + str;
+    var b = document.getElementById('lol');
+    b.append(a);
+});
+
+const selectElement3 = document.querySelector('.methods');
+selectElement3.addEventListener('change', (event) => {
+    var e = document.getElementById('methods');
+    var str = e.options[e.selectedIndex].text;
+    var a = document.createElement("p");
+    a.className = "methods-search";
+    a.innerHTML = "Провести инструментальный метод исследования: " + str;
+    var b = document.getElementById('lol');
+    b.append(a);
+});
+
+function SetCriteria()
+{
+    let adult = document.getElementById('Age');
+    let disease = document.getElementById('Disease');
+
+    let data1 = adult.valueOf();
+    let data2 = disease.valueOf();
+
+    console.log(data1);
+    console.log(data2);
+
+}

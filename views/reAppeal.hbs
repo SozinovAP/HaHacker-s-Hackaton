@@ -77,18 +77,57 @@
     <option class="S00-T98">Травмы, отравления и некоторые другие последствия воздействия внешних причин (S00 - T98)</option>
 </select>
 
+<p></p>
+<select class="Age" name="Age" id="Age">
+    <option class="Adult" onclick="SetCriteria()">Взросылй</option>
+    <option class="Child" onclick="SetCriteria()">Ребенок</option>
+</select>
+
+<select name="Disease" id="Disease">
+    <option class="C30" onclick="SetCriteria()">C30</option>
+</select>
+
+<p></p>
+<a>Тут должен быть селектор анализов
+    <select class="ufo" id="ufo">
+        <option hidden selected>Выберите анализ</option>
+        <option>Анализ1</option>
+        <option>Анализ2</option>
+    </select>
+</a>
+<p></p>
+<a>Тут должен быть селектор направлений на посещение врача
+    <select class="doctors" id="doctors">
+        <option hidden selected>Выберите анализ</option>
+        <option>Кардиолог</option>
+        <option>Хирург</option>
+    </select>
+</a>
+<p></p>
+<a>Тут должен быть селектор направлений на инструментальные методы исследования
+    <select class="methods" id="methods">
+        <option hidden selected>Выберите метод исследования</option>
+        <option>A04.01.001 Ультразвуковое исследование мягких тканей (одна анатомическая зона)</option>
+        <option>A04.06.002 Ультразвуковое исследование лимфатических узлов (одна анатомическая зона)</option>
+    </select>
+</a>
+<div class="lol" id="lol">
+    <p class="getInfo" id="getInfo">Карта пациента</p>
+</div>
+
 <form>
     <p>Критерии: </p>
-    <body>
-    {{#each criteria}}
-        <embed src="/source/criteria/{{this.criteria}}">
-            <select name="Select_answer" id="Select_answer">
-                <option class="Yes">Yes</option>
-                <option class="No">No</option>
-            </select>
-    {{/each}}
-
-    </body>
+    <table class="criteria" name="criteria" style="width:80%">
+        {{#each criteria}}
+            <tr>
+                <td>{{this}}</td>
+                <td><select name="Select_answer" id="Select_answer">
+                    <option class="Yes">Да</option>
+                    <option class="No">Нет</option>
+                </select></td>
+            </tr>
+        {{/each}}
+    </table>
 </form>
 </body>
 </html>

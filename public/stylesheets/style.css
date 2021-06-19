@@ -81,3 +81,13 @@ select:active {
   border-color: var(--accentFg);
   background-color: var(--accentFg);
 }
+.analize {
+  line-height: 0.1em;
+}
+
+.napravleniya {
+  line-height: 0.1em;
+}
+.methods-search{
+  line-height: 0.1em;
+}
