@@ -11,7 +11,7 @@ const DISEASE_CODE_COLUMN = "code";
 const AGE_COLUMN = "age";
 const ORDER_CLAUSE_COLUMN = "orderClause";
 const STANDARD_COLUMN = "standard";
-const CRITERIA_COLUMN = "criteria";
+const CRITERIA_COLUMN = "criteria"; // path to file with criteria
 const SERVICE_COLUMN = "services";
 const MEDICATIONS_COLUMN = "medications";
 const CODE_COLUMN = "code"
@@ -120,7 +120,7 @@ function GetStandardAndOrderClause(disCode, age, callback, badcallback)
             "' AND " + AGE_COLUMN + "='" + age + "'",
             (err, results) => {
             console.log(err);
-            if(!err && results.length === 1)
+            if(!err && results.length >= 0)
             {
                 callback(results);
             }
@@ -168,7 +168,7 @@ function GetService(code, callback, badcallback)
             " WHERE " + CODE_COLUMN + "='" + code + "'",
             (err, results) => {
                 console.log(err);
-                if(!err && results.length === 1)
+                if(!err && results.length >= 0)
                 {
                     callback(results);
                 }
@@ -191,7 +191,7 @@ function GetMedication(code, callback, badcallback)
             " WHERE " + CODE_COLUMN + "='" + code + "'",
             (err, results) => {
                 console.log(err);
-                if(!err && results.length === 1)
+                if(!err && results.length >= 0)
                 {
                     callback(results);
                 }
@@ -215,7 +215,7 @@ function GetServiceAndMedicationList(standard, callback, badcallback)
             " WHERE " + STANDARD_COLUMN + "='" + standard + "'",
             (err, results) => {
                 console.log(err);
-                if(!err && results.length === 1)
+                if(!err && results.length >= 0)
                 {
                     callback(results);
                 }
