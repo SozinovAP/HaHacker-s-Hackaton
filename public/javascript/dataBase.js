@@ -3,7 +3,9 @@ const sqlite3 = require('sqlite3').verbose();
 
 const ORDERS_TABLE = "orders";
 const CRITERIA_TABLE = "criteria";
-const SERVICE_LIST_TABLE = "services";
+const LIST_TABLE = "list";
+const MEDICATIONS_LIST_TABLE = "medications";
+const SERVICES_LIST_TABLE = "services";
 
 const DISEASE_CODE_COLUMN = "code";
 const AGE_COLUMN = "age";
@@ -12,6 +14,8 @@ const STANDARD_COLUMN = "standard";
 const CRITERIA_COLUMN = "criteria";
 const SERVICE_COLUMN = "services";
 const MEDICATIONS_COLUMN = "medications";
+const CODE_COLUMN = "code"
+const NAME_COLUMN = "name"
 
 function CreateDB()
 {
@@ -31,11 +35,22 @@ function CreateDB()
             "PRIMARY KEY (" + ORDER_CLAUSE_COLUMN + "))";
         db.run(sql);
 
-        sql = "CREATE TABLE IF NOT EXISTS " + SERVICE_LIST_TABLE + " (" +
+        sql = "CREATE TABLE IF NOT EXISTS " + LIST_TABLE + " (" +
             STANDARD_COLUMN + " VARCHAR(255) NOT NULL," +
             SERVICE_COLUMN + " VARCHAR(255) NOT NULL, " +
             MEDICATIONS_COLUMN + " VARCHAR(255) NOT NULL, " +
             "PRIMARY KEY ( " + STANDARD_COLUMN + "))";
+        db.run(sql);
+
+        sql = "CREATE TABLE IF NOT EXISTS " + MEDICATIONS_LIST_TABLE + " (" +
+            CODE_COLUMN + " VARCHAR(255) NOT NULL," +
+            NAME_COLUMN + " VARCHAR(255) NOT NULL, " +
+            "PRIMARY KEY ( " + CODE_COLUMN + "))";
+        db.run(sql);
+        sql = "CREATE TABLE IF NOT EXISTS " + SERVICES_LIST_TABLE + " (" +
+            CODE_COLUMN + " VARCHAR(255) NOT NULL," +
+            NAME_COLUMN + " VARCHAR(255) NOT NULL, " +
+            "PRIMARY KEY ( " + CODE_COLUMN + "))";
         db.run(sql);
     });
 }
@@ -62,11 +77,33 @@ function InsertCriteria(orderClause, criteria)
     });
 }
 
+function InsertService(code, name)
+{
+    const db = new sqlite3.Database('./databaseName');
+    db.serialize(function() {
+        let sql = "INSERT INTO " + SERVICES_LIST_TABLE +
+            " (" + CODE_COLUMN + ", " + NAME_COLUMN  + "), " +
+            "VALUES(?, ?)";
+        db.run(sql, code, name);
+    });
+}
+
+function InsertMedication(code, name)
+{
+    const db = new sqlite3.Database('./databaseName');
+    db.serialize(function() {
+        let sql = "INSERT INTO " + MEDICATIONS_LIST_TABLE +
+            " (" + CODE_COLUMN + ", " + NAME_COLUMN  + "), " +
+            "VALUES(?, ?)";
+        db.run(sql, code, name);
+    });
+}
+
 function InsertServiceAndMedicationList(standard, service, medications)
 {
     const db = new sqlite3.Database('./databaseName');
     db.serialize(function() {
-        let sql = "INSERT INTO " + SERVICE_LIST_TABLE +
+        let sql = "INSERT INTO " + LIST_TABLE +
             " (" + STANDARD_COLUMN + ", " + SERVICE_COLUMN + ", " + MEDICATIONS_COLUMN + "), " +
             "VALUES(?, ?, ?)";
         db.run(sql, standard, service, medications);
@@ -122,12 +159,59 @@ function GetCriteria(orderClause, callback, badcallback)
     db.close();
 }
 
+function GetService(code, callback, badcallback)
+{
+    const db = new sqlite3.Database('./databaseName');
+    db.serialize(function() {
+        db.all("SELECT " + SERVICES_LIST_TABLE +
+            " FROM " + NAME_COLUMN +
+            " WHERE " + CODE_COLUMN + "='" + code + "'",
+            (err, results) => {
+                console.log(err);
+                if(!err && results.length === 1)
+                {
+                    callback(results);
+                }
+                else if (badcallback)
+                {
+                    badcallback();
+                }
+
+            });
+    });
+
+    db.close();
+}
+function GetMedication(code, callback, badcallback)
+{
+    const db = new sqlite3.Database('./databaseName');
+    db.serialize(function() {
+        db.all("SELECT " + MEDICATIONS_LIST_TABLE +
+            " FROM " + NAME_COLUMN +
+            " WHERE " + CODE_COLUMN + "='" + code + "'",
+            (err, results) => {
+                console.log(err);
+                if(!err && results.length === 1)
+                {
+                    callback(results);
+                }
+                else if (badcallback)
+                {
+                    badcallback();
+                }
+
+            });
+    });
+
+    db.close();
+}
+
 function GetServiceAndMedicationList(standard, callback, badcallback)
 {
     const db = new sqlite3.Database('./databaseName');
     db.serialize(function() {
         db.all("SELECT " + SERVICE_COLUMN + ", " + MEDICATIONS_COLUMN +
-            " FROM " + SERVICE_LIST_TABLE +
+            " FROM " + LIST_TABLE +
             " WHERE " + STANDARD_COLUMN + "='" + standard + "'",
             (err, results) => {
                 console.log(err);
@@ -147,4 +231,5 @@ function GetServiceAndMedicationList(standard, callback, badcallback)
 }
 
 module.exports = {InsertOrderClause, InsertCriteria, InsertServiceAndMedicationList,
-    GetStandardAndOrderClause, GetCriteria, GetServiceAndMedicationList};
+    InsertService, InsertMedication, GetStandardAndOrderClause, GetCriteria,
+    GetServiceAndMedicationList, GetService, GetMedication};
